@@ -32,7 +32,7 @@ class Rating extends React.Component {
       index: indexOf(props, index),
       indexOver: undefined,
       // Default direction is left to right
-      direction: window.getComputedStyle(document.body).getPropertyValue("direction")
+      direction: 'ltr'
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -40,6 +40,10 @@ class Rating extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({
+      // detect the computed direction style for the mounted component
+      direction: window.getComputedStyle(this.refs.container, null).getPropertyValue("direction")
+    });
   }
 
   componentWillReceiveProps(nextProps) {
